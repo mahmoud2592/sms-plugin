@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\SMSAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Trigger new user registered event
+Route::post('/sms/events/new-user-registered', [SMSAPIController::class, 'triggerNewUserRegistered'])->name('sms.events.newUserRegistered');
+
+// Trigger new order placed event
+Route::post('/sms/events/new-order-placed', [SMSAPIController::class, 'triggerNewOrderPlaced'])->name('sms.events.newOrderPlaced');
+
+// Define routes for other events as needed

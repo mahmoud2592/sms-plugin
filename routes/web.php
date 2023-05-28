@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SMSPluginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,8 @@ Route::get('/', function () {
 });
 Route::get('/settings', 'SettingsController@index')->name('settings');
 Route::post('/settings/save', 'SettingsController@save')->name('settings.save');
+// Show the settings page
+Route::get('/sms/settings', [SMSPluginController::class, 'showSettingsPage'])->name('sms.settings');
+
+// Save the settings
+Route::post('/sms/settings/save', [SMSPluginController::class, 'saveSettings'])->name('sms.settings.save');
